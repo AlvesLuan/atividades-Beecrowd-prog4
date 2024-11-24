@@ -12,21 +12,21 @@ public class Main {
         }
     }
 
-    public static void ordenaParesCrescente(ArrayList<Integer> arrayPares){
+    public static void ordenaParesEmCrescente(ArrayList<Integer> arrayPares){
         Collections.sort(arrayPares);
     }
 
-    public static void ordenaImparesDecrescente(ArrayList<Integer> arrayImpares){
+    public static void ordenaImparesEmDecrescente(ArrayList<Integer> arrayImpares){
         arrayImpares.sort(Collections.reverseOrder());
         
     }
 
-    public static void printarTudo(ArrayList<Integer> arrayPar, ArrayList<Integer> arrayImpar){
-        for (int num : arrayPar) {
+    public static void printarTudo(ArrayList<Integer> arrayListPar, ArrayList<Integer> arrayListImpar){
+        for (int num : arrayListPar) {
             System.out.println(num);
         }
 
-        for (int num : arrayImpar) {
+        for (int num : arrayListImpar) {
             System.out.println(num);
         }
     }
@@ -49,8 +49,8 @@ public class Main {
 
         separarParesEImpares(arrayDeNumeros, pares, impares);
 
-        ordenaParesCrescente(pares);
-        ordenaImparesDecrescente(impares);
+        ordenaParesEmCrescente(pares);
+        ordenaImparesEmDecrescente(impares);
 
         printarTudo(pares, impares);
         
