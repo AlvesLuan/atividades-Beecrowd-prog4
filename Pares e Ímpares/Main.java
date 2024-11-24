@@ -12,12 +12,12 @@ public class Main {
         }
     }
 
-    public static void ordenaParesEmCrescente(ArrayList<Integer> arrayPares){
-        Collections.sort(arrayPares);
+    public static void ordenaParesEmCrescente(ArrayList<Integer> arrayListPares){
+        Collections.sort(arrayListPares);
     }
 
-    public static void ordenaImparesEmDecrescente(ArrayList<Integer> arrayImpares){
-        arrayImpares.sort(Collections.reverseOrder());
+    public static void ordenaImparesEmDecrescente(ArrayList<Integer> arrayListImpares){
+        arrayListImpares.sort(Collections.reverseOrder());
         
     }
 
