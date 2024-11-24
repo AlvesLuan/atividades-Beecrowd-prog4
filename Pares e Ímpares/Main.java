@@ -2,40 +2,57 @@ import java.io.IOException;
 import java.util.*;
  
 public class Main {
-    public static void organizarArray(int[] array){
-        Arrays.sort(array);
-
-        /*
-        int tamanho = array.length;
-        //bubbleSort não pode, mt pesadin, time exceed.
-         
-        for (int i = 0; i < tamanho - 1; i++) {
-            for (int j = 0; j < tamanho - 1 - i; j++) {
-                if (array[j] > array[j + 1]) {
-                    int aux = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = aux;
-                }
+    public static void separarParesEImpares(int[] arrayGERAL, ArrayList<Integer> pares, ArrayList<Integer> impares) {
+        for (int i = 0; i < arrayGERAL.length; i++) {
+            if(arrayGERAL[i] % 2 == 0) {
+                pares.add(arrayGERAL[i]);
+            } else {
+                impares.add(arrayGERAL[i]);
             }
-        } */
-    }
-
-    public static void mostraarrayOrganizado(int[] array){
-        for (int i = 0; i < array.length; i++){
-            System.out.println(array[i]);
         }
     }
 
+    public static void ordenaParesCrescente(ArrayList<Integer> arrayPares){
+        Collections.sort(arrayPares);
+    }
+
+    public static void ordenaImparesDecrescente(ArrayList<Integer> arrayImpares){
+        arrayImpares.sort(Collections.reverseOrder());
+        
+    }
+
+    public static void printarTudo(ArrayList<Integer> arrayPar, ArrayList<Integer> arrayImpar){
+        for (int num : arrayPar) {
+            System.out.println(num);
+        }
+
+        for (int num : arrayImpar) {
+            System.out.println(num);
+        }
+    }
+
+
+
     public static void main(String[] args) throws IOException {
         Scanner Entrada = new Scanner(System.in);
+        ArrayList<Integer> pares = new ArrayList<>();
+        ArrayList<Integer> impares = new ArrayList<>();
 
-        int tamanhoArray = Entrada.nextInt();
-        int arrayDeNumeros[] = new int[tamanhoArray];
+        int tamanho = Entrada.nextInt();
+        int arrayDeNumeros[] = new int[tamanho];
  
         for (int i = 0; i < arrayDeNumeros.length; i++){
             arrayDeNumeros[i] = Entrada.nextInt();
         }
-        organizarArray(arrayDeNumeros);
-        mostraarrayOrganizado(arrayDeNumeros);
+
+        
+
+        separarParesEImpares(arrayDeNumeros, pares, impares);
+
+        ordenaParesCrescente(pares);
+        ordenaImparesDecrescente(impares);
+
+        printarTudo(pares, impares);
+        
     }
 }
