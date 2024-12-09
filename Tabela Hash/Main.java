@@ -31,7 +31,6 @@ public class Main {
             }
             entrada.nextLine(); 
 
-            @SuppressWarnings("unchecked")
             List<Integer>[] tabelaHash = new ArrayList[enderecosBase];
             for (int j = 0; j < enderecosBase; j++) {
                 tabelaHash[j] = new ArrayList<>();
