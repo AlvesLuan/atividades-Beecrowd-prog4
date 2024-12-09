@@ -1,62 +1,52 @@
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
-    public static int[] lerChaves(int quantidadeDeChaves) {
-        int[] chaves = new int[quantidadeDeChaves];
-        String[] entradaChaves = Entrada.nextLine().split(" ");
-        
-        for (int i = 0; i < quantidadeDeChaves; i++) {
-            chaves[i] = Integer.parseInt(entradaChaves[i]);
-        }
-        return chaves;
-    }
-
-    public static List<Integer>[] criarTabelaHash(int enderecosBase, int[] chaves) {
-        List<Integer>[] tabelaHash = new List[enderecosBase];
-        for (int i = 0; i < enderecosBase; i++) {
-            tabelaHash[i] = new ArrayList<>(); 
-        }
-        for (int chave : chaves) {
-            int hash = chave % enderecosBase; 
-            tabelaHash[hash].add(chave); 
-        }
-        return tabelaHash;
-    }
-
-    public static void imprimirTabelaHash(List<Integer>[] tabelaHash) {
+    public static void imprimirTabelaHash(List<Integer>[] tabelaHash, StringBuilder sbCarregado) {
         for (int i = 0; i < tabelaHash.length; i++) {
-            System.out.print(i + " ->");
+            sbCarregado.append(i).append(" ->");
             for (int chave : tabelaHash[i]) {
-                System.out.printf(" %d ->", chave);
+                sbCarregado.append(" ").append(chave).append(" ->");
             }
-            System.out.println(" \\");
+            sbCarregado.append(" \\").append("\n");
         }
     }
 
-    public static void começarLeitura() {
-        int casosDeTeste = Entrada.nextInt();
-        Entrada.nextLine(); 
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        int casosDeTeste = entrada.nextInt();
+        entrada.nextLine(); 
+
+        StringBuilder sbCarregado = new StringBuilder();
 
         for (int i = 0; i < casosDeTeste; i++) {
-            String[] entradasASeparar = Entrada.nextLine().split(" ");
-            int enderecosBase = Integer.parseInt(entradasASeparar[0]);
-            int quantidadeDeChaves = Integer.parseInt(entradasASeparar[1]);
+            int enderecosBase = entrada.nextInt();
+            int quantidadeDeChaves = entrada.nextInt();
+            entrada.nextLine(); 
 
-            int[] chaves = lerChaves(quantidadeDeChaves);
+            int[] chaves = new int[quantidadeDeChaves];
+            for (int u = 0; u < quantidadeDeChaves; u++) {
+                chaves[u] = entrada.nextInt();
+            }
+            entrada.nextLine(); 
 
-            List<Integer>[] tabelaHash = criarTabelaHash(enderecosBase, chaves);
+            @SuppressWarnings("unchecked")
+            List<Integer>[] tabelaHash = new ArrayList[enderecosBase];
+            for (int j = 0; j < enderecosBase; j++) {
+                tabelaHash[j] = new ArrayList<>();
+            }
+            for (int chave : chaves) {
+                tabelaHash[chave % enderecosBase].add(chave);
+            }
 
-            imprimirTabelaHash(tabelaHash);
+            imprimirTabelaHash(tabelaHash, sbCarregado);
+
             if (i < casosDeTeste - 1) {
-                System.out.println(); 
+                sbCarregado.append("\n"); 
             }
         }
-    }
 
-    static Scanner Entrada = new Scanner(System.in);
-    public static void main(String[] args) throws IOException {
-        começarLeitura();
+        System.out.print(sbCarregado.toString()); 
     }
 }
