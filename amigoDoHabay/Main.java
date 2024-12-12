@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Main {
 
-    public static void organiarStringArrayList(ArrayList<String> arrayListAmigos){
+    public static void organizarArrayList(ArrayList<String> arrayListAmigos){
         Collections.sort(arrayListAmigos);
     }
 
-    public static void mostraArrayList(ArrayList<String> arrayListAmigos){
+    public static void mostrarArrayList(ArrayList<String> arrayListAmigos){
         for (String amigo : arrayListAmigos) {
             System.out.println(amigo);
         }
@@ -32,36 +32,40 @@ public class Main {
             String situacao = partes[1];
 
 
-
             if (amigoAtual == null){
                 if (situacao.equals("YES")){
                     amigoAtual = nome;
+                    //System.out.println("PRIMEIRO AMIGO!");
                 }
                 
             } else if (situacao.equals("YES") && (amigoAtual != null) ){
                 if (amigoAtual.length() > nome.length()){
                     amigoAtual = nome;
+                   // System.out.println("AMIGOU ATUAL ALTERADO!");
                 }
             }
+
 
 
             if (situacao.equals("YES")){
                 if(!amigosSIM.contains(nome)){
                     amigosSIM.add(nome);
+                    //System.out.println("adicionado a lista de YES");
                 }
             }
 
             if (situacao.equals("NO")){
                 if(!amigosNAO.contains(nome)){
                     amigosNAO.add(nome);
+                    //System.out.println("adicionado a lista de NO");
                 }
-            }
-            
+            } 
         };
-        organiarStringArrayList(amigosSIM);
-        organiarStringArrayList(amigosNAO);
-        mostraArrayList(amigosSIM);
-        mostraArrayList(amigosNAO);
+
+        organizarArrayList(amigosSIM);
+        organizarArrayList(amigosNAO);
+        mostrarArrayList(amigosSIM);
+        mostrarArrayList(amigosNAO);
 
         System.out.println("\nAmigo do Habay:\n"+amigoAtual);
 
