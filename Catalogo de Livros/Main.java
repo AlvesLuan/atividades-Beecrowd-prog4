@@ -1,60 +1,58 @@
+import java.util.*;
+import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
- 
+
 public class Main {
-
-    public static void printar(int[] arrayDeMaiores){
-        for (int num : arrayDeMaiores) {
-            System.out.println(num);
-        }
-    }
-
-    public static void somaMaiores(int[] arrayDeMaiores){
-        int resultado = 0;
-        for (int u = 0; u < arrayDeMaiores.length ; u++){
-            resultado += arrayDeMaiores[u];
-        }
-        System.out.println(resultado);
-    }
- 
-    public static void main(String[] args) throws IOException {
-        Scanner Entrada = new Scanner(System.in);
-        int linhas = 0;
-        int totalLinhas = 5;
-        int arrayDeMaiores[] = new int[5];
-        
-        /*  entradas a testar:
-            5 2 5 6 3 8 
-            5 9 6 3 1 5
-            5 4 8 5 2 6
-            5 3 2 4 9 5
-            5 7 8 5 1 4     */
-
-        while (linhas < totalLinhas) {
-            String linha = Entrada.nextLine();
-            String partes[] = linha.split(" ");
-            
-            int qtdLivros = Integer.parseInt(partes[0]);
-            int arrayDeValores[] = new int[qtdLivros];
-
-            for (int i = 0; i < qtdLivros && i + 1 < partes.length; i++) {
-                arrayDeValores[i] = Integer.parseInt(partes[i + 1]);
-            }
-
-            int maiorValor = Integer.MIN_VALUE;
-            for (int valor : arrayDeValores) {
-                if (valor > maiorValor) {
-                    maiorValor = valor;
+    
+    private static List<Integer> gerarTodosOsConjuntos(int[] portugues, int[] matematica, int[] fisica, int[] quimica, int[] biologia) {
+        List<Integer> valoresConjuntos = new ArrayList<>();
+        for (int lp : portugues) {
+            for (int lm : matematica) {
+                for (int lf : fisica) {
+                    for (int lq : quimica) {
+                        for (int lb : biologia) {
+                            valoresConjuntos.add(lp + lm + lf + lq + lb);
+                        }
+                    }
                 }
             }
-            arrayDeMaiores[linhas] = maiorValor;
-
-            linhas++;
         }
-        int ultimaLinha = Entrada.nextInt();
+        return valoresConjuntos;
+    }
 
-        somaMaiores(arrayDeMaiores);
-        //printar(arrayDeMaiores);
+    private static int[] lerLivros(Scanner scanner) {
+        int n = scanner.nextInt();
+        int[] livros = new int[n];
+        for (int i = 0; i < n; i++) {
+            livros[i] = scanner.nextInt();
+        }
+        return livros;
+    }
+
+    private static int calcularSomaDosMaiores(List<Integer> valoresConjuntos, int K) {
+        List<Integer> ordenados = valoresConjuntos.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+        int soma = 0;
+        for (int i = 0; i < K; i++) {
+            soma = soma + ordenados.get(i);
+        }
+        return soma;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] livrosPortugues = lerLivros(scanner);
+        int[] livrosMatematica = lerLivros(scanner);
+        int[] livrosFisica = lerLivros(scanner);
+        int[] livrosQuimica = lerLivros(scanner);
+        int[] livrosBiologia = lerLivros(scanner);
+        int K = scanner.nextInt();
+
+        List<Integer> valoresConjuntos = gerarTodosOsConjuntos(livrosPortugues, livrosMatematica, livrosFisica, livrosQuimica, livrosBiologia);
+
+        int soma = calcularSomaDosMaiores(valoresConjuntos, K);
+
+        System.out.println(soma);
     }
 }
