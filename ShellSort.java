@@ -1,4 +1,4 @@
-public class SortMethods {
+public class ShellSort {
     public static void main(String[] args) {
         int vetor[] = {25, 57, 48, 37, 12, 92, 86, 19, 73, 33};
         int n = vetor.length;          // tamanho do vetor
